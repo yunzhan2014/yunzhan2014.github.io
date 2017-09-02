@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-08T07:54:27.263Z</updated>
+  <updated>2017-09-02T12:30:07.648Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>优雅的使用python</title>
+    <link href="http://yoursite.com/2017/08/13/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8python/"/>
+    <id>http://yoursite.com/2017/08/13/优雅的使用python/</id>
+    <published>2017-08-13T12:26:23.000Z</published>
+    <updated>2017-09-02T12:30:07.648Z</updated>
+    
+    <content type="html"><![CDATA[<p>优雅的使用python，让自己的code更py而不是c/ja</p>
+<a id="more"></a>
+<h1 id="enumerate-让list遍历更加优雅"><a href="#enumerate-让list遍历更加优雅" class="headerlink" title="enumerate 让list遍历更加优雅"></a>enumerate 让list遍历更加优雅</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">test_list = [<span class="string">'龙母'</span>,<span class="string">'雪诺'</span>,<span class="string">'提里昂'</span>,<span class="string">'山姆'</span>]</div><div class="line">count = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> name <span class="keyword">in</span> test_list:</div><div class="line">    print(<span class="string">'%s的序号是: %d'</span> %(name, count))</div><div class="line">    count += <span class="number">1</span></div></pre></td></tr></table></figure>
+<pre><code>龙母的序号是: 0
+雪诺的序号是: 1
+提里昂的序号是: 2
+山姆的序号是: 3
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test_list = [<span class="string">'龙母'</span>,<span class="string">'雪诺'</span>,<span class="string">'提里%s</span></div></pre></td></tr></table></figure>
+<pre><code>龙母的序号是: 0
+雪诺的序号是: 1
+提里昂的序号是: 2
+山姆的序号是: 3
+</code></pre><h3 id="通过上面两个例子可以看到，在对list进行遍历的时候，使用enumerate可以直接获得对应值的索引，不需要再定义变量count进行计数"><a href="#通过上面两个例子可以看到，在对list进行遍历的时候，使用enumerate可以直接获得对应值的索引，不需要再定义变量count进行计数" class="headerlink" title="通过上面两个例子可以看到，在对list进行遍历的时候，使用enumerate可以直接获得对应值的索引，不需要再定义变量count进行计数"></a>通过上面两个例子可以看到，在对list进行遍历的时候，使用<strong>enumerate</strong>可以直接获得对应值的索引，不需要再定义变量<strong>count</strong>进行计数</h3><h1 id="zip让多个list同时遍历更加优雅"><a href="#zip让多个list同时遍历更加优雅" class="headerlink" title="zip让多个list同时遍历更加优雅"></a><strong>zip</strong>让多个list同时遍历更加优雅</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'罗柏'</span>,<span class="string">'萨莎'</span>,<span class="string">'艾莉亚'</span>,<span class="string">'布兰'</span>,<span class="string">'雪诺'</span>]</div><div class="line">list2 = [<span class="string">'灰风'</span>,<span class="string">'淑女'</span>,<span class="string">'娜梅利亚'</span>,<span class="string">'夏天'</span>,<span class="string">'白灵'</span>]</div><div class="line"><span class="keyword">for</span> stake,wolf <span class="keyword">in</span> zip(list1,list2):</div><div class="line">    print(<span class="string">"%s的小狼叫做%s"</span> %(stake, wolf))</div></pre></td></tr></table></figure>
+<pre><code>罗柏的小狼叫做灰风
+萨莎的小狼叫做淑女
+艾莉亚的小狼叫做娜梅利亚
+布兰的小狼叫做夏天
+雪诺的小狼叫做白灵
+</code></pre><h3 id="不仅对两个list可以哦，对三个list也同样是有效的"><a href="#不仅对两个list可以哦，对三个list也同样是有效的" class="headerlink" title="不仅对两个list可以哦，对三个list也同样是有效的"></a>不仅对两个list可以哦，对三个list也同样是有效的</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'罗柏'</span>,<span class="string">'萨莎'</span>,<span class="string">'艾莉亚'</span>,<span class="string">'布兰'</span>,<span class="string">'雪诺'</span>]</div><div class="line">list2 = [<span class="string">'灰风'</span>,<span class="string">'淑女'</span>,<span class="string">'娜梅利亚'</span>,<span class="string">'夏天'</span>,<span class="string">'白灵'</span>]</div><div class="line">list3 = [<span class="string">'消逝'</span>,<span class="string">'消逝'</span>,<span class="string">'改变'</span>,<span class="string">'消逝'</span>,<span class="string">'啥也不知道'</span>]</div><div class="line"><span class="keyword">for</span> stake,wolf,state <span class="keyword">in</span> zip(list1,list2,list3):</div><div class="line">    print(<span class="string">"%s的小狼%s现在已经%s"</span> %(stake, wolf,state))</div></pre></td></tr></table></figure>
+<pre><code>罗柏的小狼灰风现在已经消逝
+萨莎的小狼淑女现在已经消逝
+艾莉亚的小狼娜梅利亚现在已经改变
+布兰的小狼夏天现在已经消逝
+雪诺的小狼白灵现在已经啥也不知道
+</code></pre><h3 id="有了zip你就不再需要傻傻的使用不那么简洁的方式进行遍历了"><a href="#有了zip你就不再需要傻傻的使用不那么简洁的方式进行遍历了" class="headerlink" title="有了zip你就不再需要傻傻的使用不那么简洁的方式进行遍历了"></a>有了zip你就不再需要傻傻的使用不那么简洁的方式进行遍历了</h3><h1 id="swap变量拒绝第三者"><a href="#swap变量拒绝第三者" class="headerlink" title="swap变量拒绝第三者"></a>swap变量拒绝第三者</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">1</span></div><div class="line">y = <span class="number">2</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(a,b)</span>:</span></div><div class="line">    print(<span class="string">'Before swap a is %d, b is %d'</span> % (a, b))</div><div class="line">    temp = a</div><div class="line">    a = b</div><div class="line">    b = temp</div><div class="line">    print(<span class="string">'After swap a is %d, b is %d'</span> % (a, b))</div><div class="line">swap(x,y)</div></pre></td></tr></table></figure>
+<pre><code>Before swap a is 1, b is 2
+After swap a is 2, b is 1
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">1</span></div><div class="line">b = <span class="number">2</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(a,b)</span>:</span></div><div class="line">    print(<span class="string">'Before swap a is %d, b is %d'</span> % (a, b))</div><div class="line">    a,b = b,a</div><div class="line">    print(<span class="string">'After swap a is %d, b is %d'</span> % (a, b))</div><div class="line">swap(x,y)</div></pre></td></tr></table></figure>
+<pre><code>Before swap a is 1, b is 2
+After swap a is 2, b is 1
+</code></pre><h3 id="这个trick更像是一条赋值语句，可以看成是对变量的重新赋值，同zip一样，这个trick对多个变量也同样适用"><a href="#这个trick更像是一条赋值语句，可以看成是对变量的重新赋值，同zip一样，这个trick对多个变量也同样适用" class="headerlink" title="这个trick更像是一条赋值语句，可以看成是对变量的重新赋值，同zip一样，这个trick对多个变量也同样适用"></a>这个trick更像是一条赋值语句，可以看成是对变量的重新赋值，同zip一样，这个trick对多个变量也同样适用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x,y,z = <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></div><div class="line">print(<span class="string">"Before swap x=%d,y=%d,z=%d"</span> %(x,y,z))</div><div class="line">x,y,z = z,x,y</div><div class="line">print(<span class="string">"After swap x=%d,y=%d,z=%d"</span> %(x,y,z))</div></pre></td></tr></table></figure>
+<pre><code>Before swap x=1,y=2,z=3
+After swap x=3,y=1,z=2
+</code></pre><h1 id="dictionary的get替代缺失值的判断"><a href="#dictionary的get替代缺失值的判断" class="headerlink" title="dictionary的get替代缺失值的判断"></a>dictionary的get替代缺失值的判断</h1><h3 id="一般的实现方式"><a href="#一般的实现方式" class="headerlink" title="一般的实现方式"></a>一般的实现方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">statke_house = &#123;<span class="string">'罗柏'</span>:<span class="string">'灰风'</span>,<span class="string">'萨莎'</span>:<span class="string">'淑女'</span>,<span class="string">'艾莉亚'</span>:<span class="string">'娜梅利亚'</span>,<span class="string">'布兰'</span>:<span class="string">'夏天'</span>,<span class="string">'雪诺'</span>:<span class="string">'百灵'</span>&#125;</div><div class="line"><span class="keyword">if</span> <span class="string">'瑞肯'</span> <span class="keyword">in</span> statke_house:</div><div class="line">    statke_house[<span class="string">'瑞肯'</span>] = <span class="string">'毛毛狗'</span></div><div class="line">    print(<span class="string">'导演能不能给我加点戏～'</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(<span class="string">'存在感还能再低一点么~'</span>)</div></pre></td></tr></table></figure>
+<pre><code>存在感还能再低一点么~
+</code></pre><h3 id="简洁的实现方式"><a href="#简洁的实现方式" class="headerlink" title="简洁的实现方式"></a>简洁的实现方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">statke_house = &#123;<span class="string">'罗柏'</span>:<span class="string">'灰风'</span>,<span class="string">'萨莎'</span>:<span class="string">'淑女'</span>,<span class="string">'艾莉亚'</span>:<span class="string">'娜梅利亚'</span>,<span class="string">'布兰'</span>:<span class="string">'夏天'</span>,<span class="string">'雪诺'</span>:<span class="string">'百灵'</span>&#125;</div><div class="line">result = statke_house.get(<span class="string">'瑞肯'</span>, <span class="string">'我果然是捡来的'</span>)</div><div class="line">print(<span class="string">'瑞肯的内心: &#123;&#125;'</span> .format(result))</div></pre></td></tr></table></figure>
+<pre><code>瑞肯的内心: 我果然是捡来的
+</code></pre><h3 id="这个tip只不过是用了dictionary-get-的一个default赋值参数，所以类似像这样的小东东在python还有很多"><a href="#这个tip只不过是用了dictionary-get-的一个default赋值参数，所以类似像这样的小东东在python还有很多" class="headerlink" title="这个tip只不过是用了dictionary.get()的一个default赋值参数，所以类似像这样的小东东在python还有很多"></a>这个tip只不过是用了dictionary.get()的一个default赋值参数，所以类似像这样的小东东在python还有很多</h3><h3 id="如何把python用的更优雅，让code更易读，需要不断的探索啊"><a href="#如何把python用的更优雅，让code更易读，需要不断的探索啊" class="headerlink" title="如何把python用的更优雅，让code更易读，需要不断的探索啊^.^"></a>如何把python用的更优雅，让code更易读，需要不断的探索啊^.^</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;优雅的使用python，让自己的code更py而不是c/ja&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Coding" scheme="http://yoursite.com/categories/Coding/"/>
+    
+      <category term="python" scheme="http://yoursite.com/categories/Coding/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>在路上</title>
@@ -49,7 +110,7 @@
     <link href="http://yoursite.com/2017/08/05/%E6%AD%A6%E4%BE%A0%E5%8F%8C%E5%AD%90/"/>
     <id>http://yoursite.com/2017/08/05/武侠双子/</id>
     <published>2017-08-05T14:56:30.000Z</published>
-    <updated>2017-08-08T07:41:48.330Z</updated>
+    <updated>2017-08-11T07:51:20.073Z</updated>
     
     <content type="html"><![CDATA[<p>相信每个男孩子都一个武侠梦，金古两位的书自己读了七七八八，忍不住要发发议论</p>
 <a id="more"></a>
@@ -57,10 +118,10 @@
 <p>无锡城中花满楼，太常湖上风波恶。</p>
 <p>海峡清浅分双子，三十年前阴阳隔。</p>
 </blockquote>
-<p>&emsp;&emsp;现代武侠小说开启于上个世纪，至五六十年代达到巅峰，一时间风起云涌，出了许许多多武侠名家，诸葛青云，卧龙生，倪匡，梁羽生等。浪花淘金英雄梦，到了七八十年代，武侠风潮已过开始盛极而衰。到了我们这一代人就是修真玄幻小说的天下了。武侠小说式微已成事实。</p>
-<p>&emsp;&emsp;在时间的洗练下，我们回顾那个诸侠争雄的时代，赫然两个人物矗立其中——古龙、金庸。<img src="http://obq6frm2f.bkt.clouddn.com/illustration/zhongjiezhigu.jpg" alt=""><br>谈起新武侠小说这个两个人是说什么也绕不开的，好像论及唐诗就不能避开李白、杜甫，说起宋词就不能不讲苏轼和辛弃疾一样，金庸和古龙作为新武侠小说的代表，堪称双子星座。古龙浪漫奇谲，扣人心弦；金庸才如海大，纵横捭阖。他们以自己的知识和经历凝结出一部一部经典的作品，让这阵武侠之风吹过之后不致消弭于无形。</p>
-<p>&emsp;&emsp;窃以为金庸的人生经历与他笔下的独孤求败颇为相似，早在青年时代，他的才华就锋芒毕露，曾因撰文讥讽教导主任而被开除，后来又在大学期间组织运动开罪校方又被开除。想来那时的金庸的所做所为就隐隐有侠士之风，日后因为武侠小说闻名南北也是情理之中意料之外的事情吧。辗转到香港后的金庸，作为大公报的记者，把写作武侠小说作为副业。可终究是难掩自身才华，第一篇小说连载后就有家家话书剑的巨大反响，后来的碧血剑和雪山飞狐也不落俗套，均是佳篇，俨俨大宗师的手笔已露端倪。直到射雕英雄传横空出世，大漠苍穹，金戈铁马，把个江湖人物与历史人物结合的恰到好处。自此，金庸在武侠小说界已然独步，将众人落得更远了。后来，金庸脱离大公报，创办明报一手写社论一手写武侠（《神雕侠侣》与明报一同诞生），凭借两支笔为明报开疆拓土，待到射雕三部曲结束，明报也颇有些实力了。人到中年的金庸，也迎来人生的巅峰时期，一部天龙写尽人间情仇事情，地跨宋、辽、西夏、吐蕃、大理，发端于雁门关下也结束在此。这部宏大的作品如同玄铁重剑般败尽英雄，再无人出其右。 后来的侠客行等数部作品偃旗息鼓不复雄壮，人道金大侠已是才华用尽再也无法越过自己创造的辉煌。但是后来的笑傲江湖、鹿鼎记将这些话一扫而尽。鹿鼎记更是武侠小说中的异类，已然超越了武侠的范畴。好友倪匡将之推为金庸小说之最，至此，金庸已然进入无剑胜有剑的境界，群雄束手，再无敌手，也到了剑魔埋剑，侠士封笔的时候了。1972年金庸宣告封笔，不再写武侠说了，只留下“飞雪连天射白鹿，笑书神侠倚碧鸳”十四部小说外加一篇《越女剑》，经久不衰，像我的这样的毛头小子也在金大师封笔四十年后成为武侠小说坚实的拥趸。</p>
-<p>&emsp;&emsp;如果把金庸的作品比作汪洋大海，那我想古龙的作品就好像一条在群山中飞流激荡的清泉。虽宏大不足，但是其独特的气质和独具一格的文风，也足以为一代大师、睥睨群豪了，我的武侠开蒙小说实是古龙的作品。那时候是高中，作业很多，但是一读之下就欲罢不能，通宵达旦的看完最后一页才安心睡觉。古龙的作品就是这样，环环相扣，不到最后谁也想不到结局。但是我想真正喜欢古龙的人，不因为那些幽微难明的情节，而深爱着他笔下的人物，李寻欢，陆小凤，楚留香，更是喜欢写下这些浪子背后作者的心。古龙下笔写朋友、写江湖、写女人，写人们内心深深的寂寞，每一笔其实都是在写他自己。如果说金庸是用渊博的学识和胸襟构建自己的武侠世界的话，那么古龙就是以他的人生和经历雕琢他笔下的人物。古龙生平有三大爱好，好酒，好色，好交朋友。他好酒，无酒不欢，经常和朋友喝的大醉酩酊，因而他写醉汉是最好的，因为他醉过也饱尝过醉汉的快乐和寂寞。醉过才知酒浓，爱过方知情重，像古龙这般生活在醉与醒之间的人才写得出离夫过客的惨淡与寂寞。古龙虽然相貌丑陋，但是身边却从不缺乏美女。一来是他挥金如土浑不在意，二来是他懂女人的心。古龙笔下的金句简直可以编纂成一部恋爱圣经了，因为他是真正懂女人的男人。但是他平生最爱的最在意的还是朋友，早年古龙生活困难，全靠朋友的扶持和帮助才得以维持生计。因而，他一生中把朋友瞧得比性命还重，是个重友轻色的人，所以古龙笔下虽不乏美女，但是却多是花瓶远不及他写朋友间的情深义重。这也是他真实生活的写照。然而，无论是名酒、美女还是朋友都难以排解古大侠的寂寞。酒醒人散后的古龙是寂寞的，越是寂寞越是要喝酒，这一点是李白是很相像的，传说李白是饮酒后失足落入水中淹死的。古龙也终于不敌纵酒纵欲给身体带来的巨大伤害，英年早逝，撒手人寰了。善写十步杀一人，千里不留行豪侠勇士的古龙和李白，谁也没有熬到“白首”太玄经的年纪·······</p>
+<p>&emsp;&emsp;现代武侠小说开启于上个世纪，至五六十年代达到巅峰，一时间风起云涌，出了许许多多武侠名家，诸葛青云，卧龙生，倪匡，梁羽生等。到了七八十年代，武侠风潮已过，开始盛极而衰。到了我们这一代人就是修真玄幻小说的天下了，武侠小说式微之势已成事实。</p>
+<p>&emsp;&emsp;浪花淘金英雄梦，在时间的洗练下，回顾那个诸侠争雄的时代，赫然矗立着两座高峰——古龙、金庸。<img src="http://obq6frm2f.bkt.clouddn.com/illustration/zhongjiezhigu.jpg" alt=""><br>若谈起新武侠小说，那么这两位是无论如何也绕不开的，好像论及唐诗就不能避开李、杜，说起宋词就不能不讲苏轼和辛弃疾一样，金庸和古龙作为新武侠小说的代表，堪为一时瑜亮的。古龙浪漫奇谲，扣人心弦；金庸的才如海大，纵横捭阖。他们各自以自己的知识和经历凝结出的一部一部经典作品，让这阵武侠之风吹过之后不致消弭于无形。</p>
+<p>&emsp;&emsp;窃以为金庸的人生经历与他笔下的独孤求败颇为相似，早在青年时代，他的才华就锋芒毕露，曾因撰文讥讽教导主任而被开除，后来又在大学期间组织运动开罪校方又被开除。想来那时的金庸的所做所为就隐隐有侠士之风，日后因为武侠小说闻名南北也算是情理之中意料之外的事情吧。辗转到香港后的金庸，作为大公报的记者，把写作武侠小说作为副业。可终究是难掩自身才华，第一篇小说连载后就有家家话书剑的巨大反响，后来的碧血剑和雪山飞狐也不落俗套，均是佳篇，俨俨大宗师的手笔已露端倪。直到射雕英雄传横空出世，大漠苍穹，金戈铁马，把个江湖人物与历史人物结合的恰到好处。自此，金庸在武侠小说界已然独步，将众人落得更远了。后来，金庸脱离大公报，创办明报一手写社论一手写武侠（《神雕侠侣》与明报一同诞生），凭借两支笔为明报开疆拓土，待到射雕三部曲结束，明报也颇有些实力了。人到中年的金庸，也迎来人生的巅峰时期，一部天龙写尽人间情仇事情，地跨宋、辽、西夏、吐蕃、大理，发端于雁门关下也结束在此。这部宏大的作品如同玄铁重剑般败尽英雄，再无人出其右。后来的侠客行等数部作品偃旗息鼓不复雄壮，人道金大侠已是才华用尽再也无法越过自己创造的辉煌。但是后来的笑傲江湖、鹿鼎记将这些话一扫而尽。鹿鼎记更是武侠小说中的异类，已然超越了武侠的范畴。好友倪匡将之推为金庸小说之最，至此，金庸已然进入无剑胜有剑的境界。群雄束手，再无敌手。此刻，也到了剑魔埋剑，侠士封笔的时候了。1972年金庸宣告封笔，不再写武侠小说了，只留下“飞雪连天射白鹿，笑书神侠倚碧鸳”十四部小说外加一篇《越女剑》，经久不衰，像我的这样的毛头小子也在金大师封笔四十年后成为武侠小说坚实的拥趸。</p>
+<p>&emsp;&emsp;如果把金庸的作品比作汪洋大海，那我想古龙的作品就好像一条在群山中飞流激荡的清泉。虽宏大不足，但是其独特的气质和独具一格的文风，也足以为一代大师、睥睨群豪了，我的武侠开蒙小说实是古龙的作品。那时候是高中，作业很多，但是一读之下就欲罢不能，通宵达旦的看完最后一页才安心睡觉。古龙的作品就是这样，环环相扣，不到最后谁也想不到结局。但是我想真正喜欢古龙的人，不因为那些幽微难明的情节，而深爱着他笔下的人物，李寻欢，陆小凤，楚留香，更是喜欢写下这些浪子背后作者的心。古龙下笔写朋友、写江湖、写女人，写人们内心深深的寂寞，每一笔其实都是在写他自己。如果说金庸是用渊博的学识和胸襟构建自己的武侠世界的话，那么古龙就是以他的人生和经历雕琢他笔下的人物。古龙生平有三大爱好，好酒，好色，好交朋友。他好酒，无酒不欢，经常和朋友喝的大醉酩酊，因而他写醉汉是最好的，因为他醉过也饱尝过醉汉的快乐和寂寞。醉过才知酒浓，爱过方知情重，像古龙这般生活在醉与醒之间的人才写得出离夫过客的惨淡与寂寞。古龙虽然相貌丑陋，但是身边却从不缺乏美女。一来是他挥金如土浑不在意，二来是他懂女人的心。古龙笔下的金句简直可以编纂成一部恋爱圣经了，因为他是真正懂女人的男人。但是他平生最爱的最在意的还是朋友，早年古龙生活困难，全靠朋友的扶持和帮助才得以维持生计。因而，他一生中把朋友瞧得比性命还重，是个重友轻色的人，所以古龙笔下虽不乏美女，但是却多是花瓶远不及他写朋友间的情深义重。这也是他真实生活的写照。然而，无论是名酒、美女还是朋友都难以排解古大侠的寂寞。酒醒人散后的古龙是寂寞的，越是寂寞越是要喝酒，这一点是李白是很相像的，传说李白是饮酒后失足落入水中淹死的。古龙也终于不敌纵酒纵欲给身体带来的巨大伤害，英年早逝，撒手人寰了。善写十步杀一人，千里不留行豪侠勇士的古龙和李白，谁也没有熬到“白首太玄经“的年纪·······</p>
 <p>&emsp;&emsp;武侠小说是为大众文学，许多人很是不屑于瞧。早年王朔就撰文批评过金庸，说他写的武侠小说推重暴力于青少年的成长有害。金庸先生不置可否，不过金庸的粉丝拥趸已将其批驳的体无完肤了。我想大多数人初读武侠小说都是为里面飘渺变化的武功所吸引，为玄妙迷离的情节所倾倒。但是好的武侠如金庸如古龙，他们写小说武是末节，而人才是他们所关注的。天龙八部里面的人物百态，鹿鼎记里面官场种种不是映照于现实的么？古龙的七种武器系列，读后不禁让人莞尔，其中武器原来并不是刀剑，反而是宽恕和笑容。好的东西是能在脱离于它所处的环境下依然于人生有所醒悟的，金庸和古龙都做到了，因而他们没有为时间磨损，依然为人们所喜欢。</p>
 ]]></content>
     
