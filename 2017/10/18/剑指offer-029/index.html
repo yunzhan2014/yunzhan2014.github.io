@@ -7,13 +7,15 @@
 
     
 
-    <title>归档：2016 | Cloud stack</title>
+    <title>剑指offer_029 | Cloud stack</title>
     <meta name="author" content="John Doe">
+    
+    <meta name="description" content="剑指offer系列:x寻找数组中出现次数超过一半的数">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="剑指offer_029"/>
     <meta property="og:site_name" content="雲棧"/>
 
     
@@ -223,40 +225,102 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Coding/">Coding</a><a class="breadcrumb" href="/categories/Coding/python/">python</a>
+
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>剑指offer_029</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2017-10-18T14:38:15.000Z"><a href="/2017/10/18/剑指offer-029/">2017-10-18</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/python/" class="chip pink lighten-1">python</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/07/31/地铁十号线是一个圈/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-07-31T15:34:34.000Z">2016-07-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                地铁十号线是一个圈
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
+            <a href="/tags/algorithm/" class="chip pink lighten-1">algorithm</a>
         
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#剑指offer-029题"><span class="section table-of-contents-text">剑指offer 029题</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#HashMap的方式"><span class="section table-of-contents-text">HashMap的方式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#数组特点查找"><span class="section table-of-contents-text">数组特点查找</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>剑指offer系列:x寻找数组中出现次数超过一半的数</p>
+<a id="more"></a>
+<h1 id="剑指offer-029题"><a href="#剑指offer-029题" class="headerlink" title="剑指offer 029题"></a>剑指offer 029题</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<h2 id="HashMap的方式"><a href="#HashMap的方式" class="headerlink" title="HashMap的方式"></a>HashMap的方式</h2><p>利用空间复杂度O(n)的HashMap作为辅助空间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></div><div class="line">    HashMap = dict()</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> numbers:</div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> HashMap:</div><div class="line">            HashMap[key] += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            HashMap[key] = <span class="number">1</span></div><div class="line">    result = <span class="number">0</span></div><div class="line">    temp = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> HashMap.items():</div><div class="line">        <span class="keyword">if</span> v &gt; temp:</div><div class="line">            temp = v</div><div class="line">            result = k</div><div class="line">    <span class="keyword">if</span> temp &lt;= len(numbers)/<span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure>
+<p>在用这种方法实现的时候,设计到了python dictionary的一些特点了,在这道题的背景下,我们期望找出HashMap这个dict中value最大项所对应的key值,这里我用了一个for循环来解决,这似乎不够pythonic,是否有更加方便的方式呢?其实问题可以重新定义一下,python的dict数据类型按照value值的大小进行排序.这里用到了python的内建函数sorted,下面举例子来说明一下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">example_dict = &#123;<span class="string">'a'</span>:<span class="number">3</span>,<span class="string">'c'</span>:<span class="number">2</span>,<span class="string">'b'</span>:<span class="number">1</span>&#125;</div><div class="line">print(example_dict)</div></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 3, &apos;c&apos;: 2, &apos;b&apos;: 1}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;b&apos;, 1), (&apos;c&apos;, 2), (&apos;a&apos;, 3)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">1</span>],reverse=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;a&apos;, 3), (&apos;c&apos;, 2), (&apos;b&apos;, 1)]
+</code></pre><p>同理,如果按照key进行排序的话可以写作,reverse这个参数决定是顺序还是逆序,同时需要注意的是,sorted会生成一个新的dict,而原始的example_dict中的顺序没有被改变.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">0</span>])</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;a&apos;, 3), (&apos;b&apos;, 1), (&apos;c&apos;, 2)]
+</code></pre><h2 id="数组特点查找"><a href="#数组特点查找" class="headerlink" title="数组特点查找"></a>数组特点查找</h2><p>剑指上的第二种解法,定义了两个变量num和count,从头在数组中选取一个数,令其为num,并置count为1,开始遍历数组,如果遇到的新项与num相等则count+1,否则count-1,若count已经是0的情况下,则num换为当前的数,count重新置为0.直到遍历完成,若count此时大于0,则num即为所求结果.但是在这里需要进一步检查,是否num是在数据中超过一半,因此还需要再进行一次遍历(这里还应该有一次遍历能够解决的方案么?),代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(numbers) &lt;= <span class="number">0</span> <span class="keyword">or</span> numbers <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    num = numbers[<span class="number">0</span>]</div><div class="line">    count = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> enumerate(numbers,<span class="number">1</span>):</div><div class="line">        <span class="keyword">if</span> v == num:</div><div class="line">            count += <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> v != num <span class="keyword">and</span> count == <span class="number">0</span>:</div><div class="line">            num = v</div><div class="line">            count = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            count -= <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> count &lt;= <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    time = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> numbers:</div><div class="line">        <span class="keyword">if</span> i == num:</div><div class="line">            time += <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> time * <span class="number">2</span> &lt;= len(numbers):</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> num</div></pre></td></tr></table></figure>
+<p>细心读代码的同学应该能够看到这里也用了一个python的trick在之前的<a href="http://yunzhan2014.github.io/2017/08/13/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8python/" target="_blank" rel="external">博客</a>当中也有提到的<strong>enumerate</strong>,因为我们令num为numbers[0],此时再进行遍历的时候我们期望从numbers[1]开始向后遍历,如果采用range的形式也未尝不可,可以写作for iteration in range(1, len(numbers)-1),然后通过numbers[iteration]来取值.显然相比于上面的实现方式要显得繁琐,代码的可阅读性也不够好.因此当你想要从某个index遍历list的时候不要忘记<strong>enumerate</strong>这个实现方式.</p>
+<p>参考链接:</p>
+<ul>
+<li><a href="https://docs.python.org/3/howto/sorting.html" target="_blank" rel="external">https://docs.python.org/3/howto/sorting.html</a></li>
+<li><a href="http://www.runoob.com/python/python-func-sorted.html" target="_blank" rel="external">http://www.runoob.com/python/python-func-sorted.html</a></li>
+<li><a href="http://www.cnblogs.com/linyawen/archive/2012/03/15/2398292.html" target="_blank" rel="external">http://www.cnblogs.com/linyawen/archive/2012/03/15/2398292.html</a></li>
+</ul>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/10/09/线性回归的三种比对方式/" rel="next" title="线性回归的三种比对方式">
+    下一篇：线性回归的三种比对方式
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

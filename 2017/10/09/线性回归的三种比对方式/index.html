@@ -7,13 +7,15 @@
 
     
 
-    <title>归档：2016 | Cloud stack</title>
+    <title>线性回归的三种比对方式 | Cloud stack</title>
     <meta name="author" content="John Doe">
+    
+    <meta name="description" content="线性回归的三种求解方式python实现与sklearn和机器学习实战的结果对比">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="线性回归的三种比对方式"/>
     <meta property="og:site_name" content="雲棧"/>
 
     
@@ -223,40 +225,90 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>线性回归的三种比对方式</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
-        
-        
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/07/31/地铁十号线是一个圈/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-07-31T15:34:34.000Z">2016-07-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                地铁十号线是一个圈
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+            </div>
+            <time class="pink-link-context" datetime="2017-10-09T14:17:17.000Z"><a href="/2017/10/09/线性回归的三种比对方式/">2017-10-09</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#线性回归"><span class="section table-of-contents-text">线性回归</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>线性回归的三种求解方式python实现与sklearn和机器学习实战的结果对比</p>
+<a id="more"></a>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归作为最简单的模型,首先给出的是sklearn给出的使用随机梯度下降的方式进行求解,同时与机器学习实战中的线性回归同时与我自己写的基于迭代的方式计算得到的线性回归进行对比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">    import numpy sklearn and matplotlib</span></div><div class="line"><span class="string">    </span></div><div class="line"><span class="string">"""</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets, linear_model</div></pre></td></tr></table></figure>
+<p>1.机器学习的实战用最小二乘法的矩阵形式计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="string">Created on Jan 8, 2011</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">@author: Peter</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">(fileName)</span>:</span>      </div><div class="line">    numFeat = len(open(fileName).readline().split(<span class="string">'\t'</span>)) - <span class="number">1</span> </div><div class="line">    dataMat = []; labelMat = []</div><div class="line">    fr = open(fileName)</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</div><div class="line">        lineArr =[]</div><div class="line">        curLine = line.strip().split(<span class="string">'\t'</span>)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(numFeat):</div><div class="line">            lineArr.append(float(curLine[i]))</div><div class="line">        dataMat.append(lineArr)</div><div class="line">        labelMat.append(float(curLine[<span class="number">-1</span>]))</div><div class="line">    <span class="keyword">return</span> dataMat,labelMat</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">standRegres</span><span class="params">(xArr,yArr)</span>:</span></div><div class="line">    xMat = mat(xArr); yMat = mat(yArr).T</div><div class="line">    xTx = xMat.T*xMat</div><div class="line">    <span class="keyword">if</span> linalg.det(xTx) == <span class="number">0.0</span>:</div><div class="line">        print(<span class="string">"This matrix is singular, cannot do inverse"</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    ws = xTx.I * (xMat.T*yMat)</div><div class="line">    <span class="keyword">return</span> ws</div><div class="line"></div><div class="line">xArr, yArr = loadDataSet(<span class="string">'./machinelearninginaction/Ch08/ex0.txt'</span>)</div><div class="line">ws = standRegres(xArr, yArr)</div><div class="line">ws = ws.reshape(<span class="number">2</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = predict(xArr, ws)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_3_0.png" alt="png"></p>
+<p>2.调用sklearn的Linear Regression的包得到的结果,可以看到和机器学习实战所得到的结果一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">regr = linear_model.LinearRegression()</div><div class="line">regr.fit(xArr, yArr)</div><div class="line">regr.coef_</div><div class="line">regr.get_params</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = regr.predict(xArr)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_5_0.png" alt="png"></p>
+<p>3.用迭代的方式计算线性回归的解</p>
+<p>$$<br>\theta_j := \theta_j + \alpha (y^i - h(\theta))x_j<br>$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_regression</span><span class="params">(feature_arr, label_arr)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    use SGD method to optimize linear regression</span></div><div class="line"><span class="string">    :param feature_arr: the train feature</span></div><div class="line"><span class="string">    :param label_arr: the train label </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    """</span></div><div class="line">    feature_num = len(feature_arr[<span class="number">0</span>])</div><div class="line">    sample_num = len(feature_arr)</div><div class="line">    </div><div class="line">    feature_arr = np.array(feature_arr)</div><div class="line">    para = np.random.rand(feature_num, <span class="number">1</span>)</div><div class="line">    learning_rate = <span class="number">0.01</span></div><div class="line">    loss = <span class="number">0</span></div><div class="line">    iteration = <span class="number">0</span></div><div class="line">    threshold = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span>(iteration &gt; <span class="number">1000</span> <span class="keyword">or</span> threshold &lt; <span class="number">1e-8</span>):</div><div class="line">        last_loss = loss</div><div class="line">        iteration += <span class="number">1</span></div><div class="line">        loss = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> x,y <span class="keyword">in</span> zip(feature_arr, label_arr):</div><div class="line">            x = x.reshape(<span class="number">1</span>,len(x))</div><div class="line">            loss += (np.dot(x, para) - y) ** <span class="number">2</span></div><div class="line">            para += learning_rate * (y - np.dot(x, para)) * x.reshape(feature_num,<span class="number">1</span>)</div><div class="line">        threshold = abs(loss - last_loss)</div><div class="line">    <span class="keyword">return</span> para</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(feature_arr, para_vector)</span>:</span></div><div class="line">    np.zeros((len(feature_arr), <span class="number">1</span>))</div><div class="line">    predict_value = sum(feature_arr * para_vector, axis=<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> predict_value</div><div class="line">    </div><div class="line">weight = linear_regression(xArr, yArr)</div><div class="line">weight = weight.reshape(<span class="number">2</span>,)</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = predict(xArr, weight)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<pre><code>Created on Jan 8, 2011
+
+@author: Peter
+</code></pre><p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_7_1.png" alt="png"></p>
+<p>通过上面的例子可以看出来,使用随机梯度下降的方法不能够像用最小二乘法那样得到一个稳定的固定的解,解是与初始化的权重有关的.但是在整体趋势上是与其一致的</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2017/10/18/剑指offer-029/" rel="next" title="剑指offer_029">
+    上一篇：剑指offer_029
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/08/13/优雅的使用python/" rel="next" title="优雅的使用python">
+    下一篇：优雅的使用python
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

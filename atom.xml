@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-02T12:39:36.761Z</updated>
+  <updated>2017-10-18T14:46:35.030Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,97 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>剑指offer_029</title>
+    <link href="http://yoursite.com/2017/10/18/%E5%89%91%E6%8C%87offer-029/"/>
+    <id>http://yoursite.com/2017/10/18/剑指offer-029/</id>
+    <published>2017-10-18T14:38:15.000Z</published>
+    <updated>2017-10-18T14:46:35.030Z</updated>
+    
+    <content type="html"><![CDATA[<p>剑指offer系列:x寻找数组中出现次数超过一半的数</p>
+<a id="more"></a>
+<h1 id="剑指offer-029题"><a href="#剑指offer-029题" class="headerlink" title="剑指offer 029题"></a>剑指offer 029题</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<h2 id="HashMap的方式"><a href="#HashMap的方式" class="headerlink" title="HashMap的方式"></a>HashMap的方式</h2><p>利用空间复杂度O(n)的HashMap作为辅助空间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></div><div class="line">    HashMap = dict()</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> numbers:</div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> HashMap:</div><div class="line">            HashMap[key] += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            HashMap[key] = <span class="number">1</span></div><div class="line">    result = <span class="number">0</span></div><div class="line">    temp = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> HashMap.items():</div><div class="line">        <span class="keyword">if</span> v &gt; temp:</div><div class="line">            temp = v</div><div class="line">            result = k</div><div class="line">    <span class="keyword">if</span> temp &lt;= len(numbers)/<span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure>
+<p>在用这种方法实现的时候,设计到了python dictionary的一些特点了,在这道题的背景下,我们期望找出HashMap这个dict中value最大项所对应的key值,这里我用了一个for循环来解决,这似乎不够pythonic,是否有更加方便的方式呢?其实问题可以重新定义一下,python的dict数据类型按照value值的大小进行排序.这里用到了python的内建函数sorted,下面举例子来说明一下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">example_dict = &#123;<span class="string">'a'</span>:<span class="number">3</span>,<span class="string">'c'</span>:<span class="number">2</span>,<span class="string">'b'</span>:<span class="number">1</span>&#125;</div><div class="line">print(example_dict)</div></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 3, &apos;c&apos;: 2, &apos;b&apos;: 1}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;b&apos;, 1), (&apos;c&apos;, 2), (&apos;a&apos;, 3)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">1</span>],reverse=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;a&apos;, 3), (&apos;c&apos;, 2), (&apos;b&apos;, 1)]
+</code></pre><p>同理,如果按照key进行排序的话可以写作,reverse这个参数决定是顺序还是逆序,同时需要注意的是,sorted会生成一个新的dict,而原始的example_dict中的顺序没有被改变.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted(example_dict.items(), key= <span class="keyword">lambda</span> item:item[<span class="number">0</span>])</div></pre></td></tr></table></figure>
+<pre><code>[(&apos;a&apos;, 3), (&apos;b&apos;, 1), (&apos;c&apos;, 2)]
+</code></pre><h2 id="数组特点查找"><a href="#数组特点查找" class="headerlink" title="数组特点查找"></a>数组特点查找</h2><p>剑指上的第二种解法,定义了两个变量num和count,从头在数组中选取一个数,令其为num,并置count为1,开始遍历数组,如果遇到的新项与num相等则count+1,否则count-1,若count已经是0的情况下,则num换为当前的数,count重新置为0.直到遍历完成,若count此时大于0,则num即为所求结果.但是在这里需要进一步检查,是否num是在数据中超过一半,因此还需要再进行一次遍历(这里还应该有一次遍历能够解决的方案么?),代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(numbers) &lt;= <span class="number">0</span> <span class="keyword">or</span> numbers <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    num = numbers[<span class="number">0</span>]</div><div class="line">    count = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> enumerate(numbers,<span class="number">1</span>):</div><div class="line">        <span class="keyword">if</span> v == num:</div><div class="line">            count += <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> v != num <span class="keyword">and</span> count == <span class="number">0</span>:</div><div class="line">            num = v</div><div class="line">            count = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            count -= <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> count &lt;= <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    time = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> numbers:</div><div class="line">        <span class="keyword">if</span> i == num:</div><div class="line">            time += <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> time * <span class="number">2</span> &lt;= len(numbers):</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> num</div></pre></td></tr></table></figure>
+<p>细心读代码的同学应该能够看到这里也用了一个python的trick在之前的<a href="http://yunzhan2014.github.io/2017/08/13/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8python/" target="_blank" rel="external">博客</a>当中也有提到的<strong>enumerate</strong>,因为我们令num为numbers[0],此时再进行遍历的时候我们期望从numbers[1]开始向后遍历,如果采用range的形式也未尝不可,可以写作for iteration in range(1, len(numbers)-1),然后通过numbers[iteration]来取值.显然相比于上面的实现方式要显得繁琐,代码的可阅读性也不够好.因此当你想要从某个index遍历list的时候不要忘记<strong>enumerate</strong>这个实现方式.</p>
+<p>参考链接:</p>
+<ul>
+<li><a href="https://docs.python.org/3/howto/sorting.html" target="_blank" rel="external">https://docs.python.org/3/howto/sorting.html</a></li>
+<li><a href="http://www.runoob.com/python/python-func-sorted.html" target="_blank" rel="external">http://www.runoob.com/python/python-func-sorted.html</a></li>
+<li><a href="http://www.cnblogs.com/linyawen/archive/2012/03/15/2398292.html" target="_blank" rel="external">http://www.cnblogs.com/linyawen/archive/2012/03/15/2398292.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;剑指offer系列:x寻找数组中出现次数超过一半的数&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Coding" scheme="http://yoursite.com/categories/Coding/"/>
+    
+      <category term="python" scheme="http://yoursite.com/categories/Coding/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="algorithm" scheme="http://yoursite.com/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线性回归的三种比对方式</title>
+    <link href="http://yoursite.com/2017/10/09/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E4%B8%89%E7%A7%8D%E6%AF%94%E5%AF%B9%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2017/10/09/线性回归的三种比对方式/</id>
+    <published>2017-10-09T14:17:17.000Z</published>
+    <updated>2017-10-18T14:48:59.402Z</updated>
+    
+    <content type="html"><![CDATA[<p>线性回归的三种求解方式python实现与sklearn和机器学习实战的结果对比</p>
+<a id="more"></a>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归作为最简单的模型,首先给出的是sklearn给出的使用随机梯度下降的方式进行求解,同时与机器学习实战中的线性回归同时与我自己写的基于迭代的方式计算得到的线性回归进行对比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">    import numpy sklearn and matplotlib</span></div><div class="line"><span class="string">    </span></div><div class="line"><span class="string">"""</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets, linear_model</div></pre></td></tr></table></figure>
+<p>1.机器学习的实战用最小二乘法的矩阵形式计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="string">Created on Jan 8, 2011</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">@author: Peter</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">(fileName)</span>:</span>      </div><div class="line">    numFeat = len(open(fileName).readline().split(<span class="string">'\t'</span>)) - <span class="number">1</span> </div><div class="line">    dataMat = []; labelMat = []</div><div class="line">    fr = open(fileName)</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</div><div class="line">        lineArr =[]</div><div class="line">        curLine = line.strip().split(<span class="string">'\t'</span>)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(numFeat):</div><div class="line">            lineArr.append(float(curLine[i]))</div><div class="line">        dataMat.append(lineArr)</div><div class="line">        labelMat.append(float(curLine[<span class="number">-1</span>]))</div><div class="line">    <span class="keyword">return</span> dataMat,labelMat</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">standRegres</span><span class="params">(xArr,yArr)</span>:</span></div><div class="line">    xMat = mat(xArr); yMat = mat(yArr).T</div><div class="line">    xTx = xMat.T*xMat</div><div class="line">    <span class="keyword">if</span> linalg.det(xTx) == <span class="number">0.0</span>:</div><div class="line">        print(<span class="string">"This matrix is singular, cannot do inverse"</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    ws = xTx.I * (xMat.T*yMat)</div><div class="line">    <span class="keyword">return</span> ws</div><div class="line"></div><div class="line">xArr, yArr = loadDataSet(<span class="string">'./machinelearninginaction/Ch08/ex0.txt'</span>)</div><div class="line">ws = standRegres(xArr, yArr)</div><div class="line">ws = ws.reshape(<span class="number">2</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = predict(xArr, ws)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_3_0.png" alt="png"></p>
+<p>2.调用sklearn的Linear Regression的包得到的结果,可以看到和机器学习实战所得到的结果一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">regr = linear_model.LinearRegression()</div><div class="line">regr.fit(xArr, yArr)</div><div class="line">regr.coef_</div><div class="line">regr.get_params</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = regr.predict(xArr)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_5_0.png" alt="png"></p>
+<p>3.用迭代的方式计算线性回归的解</p>
+<p>$$<br>\theta_j := \theta_j + \alpha (y^i - h(\theta))x_j<br>$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_regression</span><span class="params">(feature_arr, label_arr)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    use SGD method to optimize linear regression</span></div><div class="line"><span class="string">    :param feature_arr: the train feature</span></div><div class="line"><span class="string">    :param label_arr: the train label </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    """</span></div><div class="line">    feature_num = len(feature_arr[<span class="number">0</span>])</div><div class="line">    sample_num = len(feature_arr)</div><div class="line">    </div><div class="line">    feature_arr = np.array(feature_arr)</div><div class="line">    para = np.random.rand(feature_num, <span class="number">1</span>)</div><div class="line">    learning_rate = <span class="number">0.01</span></div><div class="line">    loss = <span class="number">0</span></div><div class="line">    iteration = <span class="number">0</span></div><div class="line">    threshold = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span>(iteration &gt; <span class="number">1000</span> <span class="keyword">or</span> threshold &lt; <span class="number">1e-8</span>):</div><div class="line">        last_loss = loss</div><div class="line">        iteration += <span class="number">1</span></div><div class="line">        loss = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> x,y <span class="keyword">in</span> zip(feature_arr, label_arr):</div><div class="line">            x = x.reshape(<span class="number">1</span>,len(x))</div><div class="line">            loss += (np.dot(x, para) - y) ** <span class="number">2</span></div><div class="line">            para += learning_rate * (y - np.dot(x, para)) * x.reshape(feature_num,<span class="number">1</span>)</div><div class="line">        threshold = abs(loss - last_loss)</div><div class="line">    <span class="keyword">return</span> para</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(feature_arr, para_vector)</span>:</span></div><div class="line">    np.zeros((len(feature_arr), <span class="number">1</span>))</div><div class="line">    predict_value = sum(feature_arr * para_vector, axis=<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> predict_value</div><div class="line">    </div><div class="line">weight = linear_regression(xArr, yArr)</div><div class="line">weight = weight.reshape(<span class="number">2</span>,)</div><div class="line"></div><div class="line">x_aix = np.array(xArr)[:,<span class="number">1</span>]</div><div class="line">y_turly_value = np.array(yArr)</div><div class="line">y_pre = predict(xArr, weight)</div><div class="line"></div><div class="line">plt.scatter(x_aix, y_turly_value, color=<span class="string">'black'</span>)</div><div class="line">plt.plot(x_aix, y_pre, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<pre><code>Created on Jan 8, 2011
+
+@author: Peter
+</code></pre><p><img src="http://obq6frm2f.bkt.clouddn.com/bolg/output_7_1.png" alt="png"></p>
+<p>通过上面的例子可以看出来,使用随机梯度下降的方法不能够像用最小二乘法那样得到一个稳定的固定的解,解是与初始化的权重有关的.但是在整体趋势上是与其一致的</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;线性回归的三种求解方式python实现与sklearn和机器学习实战的结果对比&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>优雅的使用python</title>
     <link href="http://yoursite.com/2017/08/13/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8python/"/>
     <id>http://yoursite.com/2017/08/13/优雅的使用python/</id>
     <published>2017-08-13T12:26:23.000Z</published>
-    <updated>2017-09-02T12:39:36.761Z</updated>
+    <updated>2017-09-20T10:45:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>优雅的使用python，让自己的code更pythonic</p>
 <a id="more"></a>
@@ -67,7 +153,8 @@ After swap x=3,y=1,z=2
 <pre><code>瑞肯的内心: 我果然是捡来的
 </code></pre><p> 这个tip只不过是用了dictionary.get()的一个default赋值参数，所以类似像这样的小东东在python还有很多</p>
 <p> 如何把python用的更优雅，让code更易读，需要不断的探索啊^.^</p>
-]]></content>
+<p>—————————————— 二更分割线 —————————————</p>
+<h1 id="判断None和判断空"><a href="#判断None和判断空" class="headerlink" title="判断None和判断空"></a>判断None和判断空</h1>]]></content>
     
     <summary type="html">
     
@@ -118,7 +205,7 @@ After swap x=3,y=1,z=2
     <link href="http://yoursite.com/2017/08/05/%E6%AD%A6%E4%BE%A0%E5%8F%8C%E5%AD%90/"/>
     <id>http://yoursite.com/2017/08/05/武侠双子/</id>
     <published>2017-08-05T14:56:30.000Z</published>
-    <updated>2017-08-11T07:51:20.073Z</updated>
+    <updated>2017-10-13T14:28:55.000Z</updated>
     
     <content type="html"><![CDATA[<p>相信每个男孩子都一个武侠梦，金古两位的书自己读了七七八八，忍不住要发发议论</p>
 <a id="more"></a>
